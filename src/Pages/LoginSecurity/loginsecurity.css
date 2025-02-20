@@ -1,0 +1,35 @@
+.login-security-cont{
+  padding: 0 200px;
+}
+.login-heading{
+  padding: 10px 20px;
+  font-size: 35px;
+  margin: 20px 0;
+}
+.login-security-top{
+  border: 2px solid #6F4E37;
+  border-radius: 10px;
+}
+
+.login-name-section{
+  padding: 20px 40px;
+  border-bottom: 1px solid #6F4E37;
+}
+.name-section div{
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.name-section p{
+  font-size: 14px;
+}
+.edit-button button {
+  color: #6F4E37;
+  padding: 7px 40px;
+  border: 2px solid #6F4E37;
+  border-radius: 20px;
+  background-color: #fff;
+  font-weight: 600;
+}
+
+
+
