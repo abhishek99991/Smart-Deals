@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../ReusableComp/Header";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import phone_icon from "../assets/ds-mob-icon.png";
 import Slider from "react-slick";
 import banner_img from "../assets/banner-img.png"; 
 import BestSeller from "../ReusableComp/BestSeller";
@@ -13,7 +12,6 @@ import newArrivalHalf from "../assets/new-arrival-half.png"
 import Footer from "../ReusableComp/footer"
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { MdKeyboardArrowRight } from "react-icons/md";
-// import { Link } from "react-router-dom";
 import ShopBrand1 from "../assets/shop-brand1.png"
 import ShopBrand2 from "../assets/shop-brand2.png"
 import ShopBrand3 from "../assets/shop-brand3.png"
@@ -23,15 +21,11 @@ import ShopBrand6 from "../assets/shop-brand6.png"
 import ShopBrand7 from "../assets/shop-brand7.png"
 import SliderSection from "../ReusableComp/sliderSection";
 import { getCategories } from "../store/services/Auth";
-
-
-
-
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const [categories, setCategories]:any = useState([])
-  
-
+  const [categories, setCategories]:any = useState([]);
+  const navigate: any = useNavigate();
   const CustomPrevArrow = (props: any) => {
     const { className, style, onClick } = props;
     return (
@@ -68,7 +62,6 @@ const Home = () => {
           fontSize: "24px",
           position: "absolute",
           right: "45%",
-          // bottom:"-60px",
           zIndex: 1,
           cursor: "pointer",
           backgroundColor:"efefef",
@@ -76,7 +69,7 @@ const Home = () => {
           top:"200px"
 
         }}
-        onClick={onClick} // Fix: Add onClick handler
+        onClick={onClick}
       />
     );
   };
@@ -110,28 +103,31 @@ const Home = () => {
     ],
   };
 
-useEffect(() => {
-  getCategories()
-  .then((res:any) =>{
-    setCategories(res)
-  }).catch((err) => console.log('err', err))
-}, [])
-// console.log('uiuiiui',categories)
+  useEffect(() => {
+    getCategories()
+    .then((res:any) =>{
+      setCategories(res)
+    }).catch((err) => console.log('err', err))
+  }, [])
 
+
+  const clickParticularItem = (cat_id: any) => {
+    navigate("/shop");
+  }
 
   return (
     <div>
       <Navbar />
         <div className='container slider-head'>
         <Slider {...settings}>
-        {categories?.map((item: any, index: number) => (
-  <div className="slide-top" key={item.id}>
-    <div className="slide">
-      <img src={item.category_image} />
-    </div>
-    <p>{item.name}</p>
-  </div>
-))}
+        {categories?.map((item: any) => (
+          <div className="slide-top" key={item.id} onClick={() => clickParticularItem(item.id)}>
+            <div className="slide">
+              <img src={item.category_image} />
+            </div>
+            <p>{item.name}</p>
+          </div>
+        ))}
 
          
         </Slider>
