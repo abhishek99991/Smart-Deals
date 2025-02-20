@@ -788,7 +788,7 @@ padding: 5px 5px;
   display: inline-block;
 }
 .changepwd-error-message{
-  color: #7a4a31;
+  color: red;
     font-size: 14px;
     margin: 3px 0 10px 5px;
     text-align: left;

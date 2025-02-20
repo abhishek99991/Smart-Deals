@@ -36,7 +36,7 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ forgetonClose }) => {
 
   return (
     <>
-    {sendOtp ? (
+    {sendOtp ? ( 
       <OtpPopup setData={setData} data={data} onClose={forgetonClose}  />
     ) : (
       <div className="forget-popup-container">
@@ -61,7 +61,7 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ forgetonClose }) => {
                 <div className="forget-input">
                   <Field type="email" name="email" placeholder="Enter your email" className="input-field" />
                 </div>
-                <ErrorMessage name="email" component="div" className="error-message" />
+                <ErrorMessage name="email" component="div" className="changepwd-error-message" />
                 <button type="submit" className="forget-update-btn" disabled={isSubmitting}>
                   {isSubmitting ? "Sending..." : "Send OTP"}
                 </button>

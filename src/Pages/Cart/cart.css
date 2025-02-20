@@ -72,6 +72,8 @@
   border-radius: 10px;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
+  border: none;
+  outline: none;
 }
 .white{
   color: #fff;
