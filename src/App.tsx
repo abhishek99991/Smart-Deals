@@ -14,7 +14,7 @@ import LoginSecurity from './Pages/LoginSecurity/LoginSecurity'
 import Adress from './Pages/Address/Address'
 import Order from './Pages/Order/Order'
 import { Toaster } from "react-hot-toast";
-// import SignIn from './Pages/SignIn'
+
 
 function App() {
 
@@ -36,6 +36,7 @@ function App() {
               <Route path='/search-result' element={<SearchResult />}/>
               <Route path='/login-security' element={<LoginSecurity />}/>
               <Route path='/address' element={<Adress />}/>
+              <Route path='/order' element={<Order />}/>
               <Route path='/order' element={<Order />}/>
           </Routes>
       </BrowserRouter>

@@ -35,6 +35,20 @@ export const authEndpoints = {
       ...defaults.versions.v1,
       uri: "/profile/",
     },
-  }
+  },
+  getCategories: {
+    v1: {
+      ...defaults.methods.GET,
+      ...defaults.versions.v1,
+      uri: "/categories/",
+    },
+  },
+  // forgetPassword: {
+  //   v1: {
+  //     ...defaults.methods.POST,
+  //     ...defaults.versions.v1,
+  //     uri: "/send-otp/",
+  //   },
+  // },
 }
 

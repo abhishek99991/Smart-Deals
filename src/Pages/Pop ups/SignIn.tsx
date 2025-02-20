@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { loginApiCall } from "../store/services/Auth";
+import { loginApiCall } from "../../store/services/Auth";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import ForgotPassword from "./forgetPassword";
 
 
 interface SignInProps { 
@@ -14,7 +15,7 @@ interface SignInProps {
 
 const SignIn: React.FC<SignInProps> = ({ onSwitch, onClose }) => {
   const [showPassword, setShowPassword] = useState(false);
-
+  const [isForgotPasswordOpen, setForgotPasswordOpen] = useState(false);
   const Navigate = useNavigate()
 
 
@@ -54,6 +55,7 @@ const SignIn: React.FC<SignInProps> = ({ onSwitch, onClose }) => {
   });
 
   return (
+   <>
     <form className="login-content" onSubmit={formik.handleSubmit}>
       {/* Email Input */}
       <input
@@ -78,12 +80,19 @@ const SignIn: React.FC<SignInProps> = ({ onSwitch, onClose }) => {
       </div>
       {formik.touched.password && formik.errors.password && <p className="error">{formik.errors.password}</p>}
 
-      <a href="#" className="forgot-password">Forgot your password?</a>
+      <a href="#" className="forgot-password" onClick={() => setForgotPasswordOpen(true)}>Forgot your password?</a>
       <button type="submit" className="login-btn">Sign In</button>
       <p className="register-link">
         New to DealSmart? <a onClick={onSwitch}>Register</a>
       </p>
     </form>
+            {/* Forgot Password Popup */}
+      {isForgotPasswordOpen && <ForgotPassword forgetonClose={() => setForgotPasswordOpen(false)} />}
+
+    </>
+
+
+      
   );
 };
 

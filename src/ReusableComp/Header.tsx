@@ -3,9 +3,9 @@ import logo from "../assets/logo.png";
 import { IoSearchOutline } from "react-icons/io5";
 import { FaRegUser } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
-import OtpPopup from "../Pages/otpPopup";
-import SignIn from "../Pages/SignIn";
-import Register from "../Pages/Register";
+import OtpPopup from "../Pages/Pop ups/otpPopup";
+import SignIn from "../Pages/Pop ups/SignIn";
+import Register from "../Pages/Pop ups/Register";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 

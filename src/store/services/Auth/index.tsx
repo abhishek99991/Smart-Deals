@@ -30,3 +30,13 @@ export const registerUser = ({ body }: any) =>
           callApi({
             uriEndPoint: authEndpoints.getUserDetails.v1,
           });
+
+ export const getCategories = () =>
+          callApi({
+           uriEndPoint: authEndpoints.getCategories.v1,
+           });
+           
+ export const forgetPassword = () =>
+          callApi({
+           uriEndPoint: authEndpoints.getCategories.v1,
+           });

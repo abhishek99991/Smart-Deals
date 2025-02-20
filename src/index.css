@@ -100,10 +100,14 @@ a{
 /* slider  */
 
 .slide {
-  display: flex; 
+  display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
+  height: 100px;
+  padding: 20px 15px;
+  background-color: #A18775;
+  border-radius: 50%;
 }
 .slider-head{
   padding: 25px 0;
@@ -112,15 +116,27 @@ a{
   margin-right: 10px;
 }
 .slide-top{
-    padding: 20px 20px;
+    padding: 10px 15px;
     text-align: center;
     /* width: 150px; */
 }
 .slide img {
   width: 100%;
   border-radius: 10px;
+  height: 100%;
 }
-
+.slide-speaker{
+  width: 100%;
+  height: 100px;
+  padding: 20px 15px;
+  /* background-color: #A18775; */
+  border-radius: 50%;
+}
+.slide-speaker img {
+  width: 100%;
+  /* border-radius: 10px; */
+  height: 100%;
+}
 .slide-top p{
   margin-top: 10px;
   font-size: 16px;
@@ -699,4 +715,68 @@ padding: 5px 5px;
 }
 .speaker-slide .slick-slide>div {
   margin-right: 10px;
+}
+
+
+ /* forget popup  */
+ .forget-input{
+  margin: 10px 0;
+ }
+ .forget-input input{
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3sease;
+  outline: none;
+ }
+ .forget-popup-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+    display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.forget-popup {
+  background: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    height: 85%;
+    max-height: 80%;
+    overflow-y: auto;
+}
+
+.forget-close-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.forget-update-btn {
+  width: 100%;
+  background-color: #7a4a31;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3sease;
+  display: inline-block;
 }

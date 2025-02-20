@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { registerUser } from "../store/services/Auth";
+import { registerUser } from "../../store/services/Auth";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useAtom } from "jotai";
-import { UserEmail } from "../../Jotai";
+import { UserEmail } from "../../../Jotai";
 import toast from "react-hot-toast"; // Import toast
 
 interface RegisterProps {

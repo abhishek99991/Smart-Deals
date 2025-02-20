@@ -97,7 +97,7 @@ const sliderSection = () => {
               <div className="col-70 speaker-slide">
               <Slider {...settings}>
           <div className="slide-top-head">
-            <div className="slide speaker-margin"><img src={speakerSliderImg} alt="Slide 1" /></div>
+            <div className="slide-speaker speaker-margin"><img src={speakerSliderImg} alt="Slide 1" /></div>
             <div className='bose-smart-top'>
               <div className='bose-smart-text'>Bose Smart Soundbar 892079-4100 Black</div>
                  <div className="flex align-center">
@@ -121,7 +121,7 @@ const sliderSection = () => {
             </div>
           </div>
           <div className="slide-top-head">
-            <div className="slide speaker-margin"><img src={speakerSliderImg} alt="Slide 1" /></div>
+            <div className="slide-speaker speaker-margin"><img src={speakerSliderImg} alt="Slide 1" /></div>
             <div className='bose-smart-top'>
               <div className='bose-smart-text'>Bose Smart Soundbar 892079-4100 Black</div>
                  <div className="flex align-center">
@@ -145,7 +145,7 @@ const sliderSection = () => {
             </div>
           </div>
           <div className="slide-top-head">
-            <div className="slide speaker-margin"><img src={speakerSliderImg} alt="Slide 1" /></div>
+            <div className="slide-speaker speaker-margin"><img src={speakerSliderImg} alt="Slide 1" /></div>
             <div className='bose-smart-top'>
               <div className='bose-smart-text'>Bose Smart Soundbar 892079-4100 Black</div>
                  <div className="flex align-center">

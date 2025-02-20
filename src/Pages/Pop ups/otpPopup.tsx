@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import otpImage from "../assets/otp-img.png";
-import { sendOtpEmail } from "../store/services/Auth";
-import { UserEmail } from "../../Jotai";
+import otpImage from "../../assets/email-otp.png";
+import { sendOtpEmail } from "../../store/services/Auth";
+import { UserEmail } from "../../../Jotai";
 import { useAtom } from "jotai";
 import toast from "react-hot-toast";
 

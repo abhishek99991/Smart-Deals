@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../ReusableComp/Header";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -22,12 +22,16 @@ import ShopBrand5 from "../assets/shop-brand5.png"
 import ShopBrand6 from "../assets/shop-brand6.png"
 import ShopBrand7 from "../assets/shop-brand7.png"
 import SliderSection from "../ReusableComp/sliderSection";
+import { getCategories } from "../store/services/Auth";
 
 
 
 
 
 const Home = () => {
+  const [categories, setCategories]:any = useState([])
+  
+
   const CustomPrevArrow = (props: any) => {
     const { className, style, onClick } = props;
     return (
@@ -45,7 +49,7 @@ const Home = () => {
           cursor: "pointer",
            backgroundColor:"efefef",
           borderRadius:"10px",
-          top:"230px"
+          top:"200px"
         }}
         onClick={onClick} // Fix: Add onClick handler
       />
@@ -69,7 +73,7 @@ const Home = () => {
           cursor: "pointer",
           backgroundColor:"efefef",
           borderRadius:"10px",
-          top:"230px"
+          top:"200px"
 
         }}
         onClick={onClick} // Fix: Add onClick handler
@@ -106,43 +110,30 @@ const Home = () => {
     ],
   };
 
+useEffect(() => {
+  getCategories()
+  .then((res:any) =>{
+    setCategories(res)
+  }).catch((err) => console.log('err', err))
+}, [])
+// console.log('uiuiiui',categories)
+
+
   return (
     <div>
       <Navbar />
         <div className='container slider-head'>
         <Slider {...settings}>
-          <div className="slide-top">
-            <div className="slide"><img src={phone_icon} alt="Slide 1" /></div>
-            <p>Smart Phones</p>
-          </div>
-          <div className="slide-top">
-          <div className="slide"><img src={phone_icon} alt="Slide 2" /></div>
-            <p>Laptops</p>
-          </div>
-          <div className="slide-top">
-          <div className="slide"><img src={phone_icon} alt="Slide 3" /></div>
-            <p>Smartwatches</p>
-          </div>
-          <div className="slide-top">
-          <div className="slide"><img src={phone_icon} alt="Slide 4" /></div>
-             <p>Tablets</p>
-          </div>
-          <div className="slide-top">
-          <div className="slide"><img src={phone_icon} alt="Slide 5" /></div>
-           <p>Earphones</p>
-          </div>
-          <div className="slide-top">
-          <div className="slide"><img src={phone_icon} alt="Slide 6" /></div>
-            <p>Smart TV</p>
-          </div>
-          <div className="slide-top">
-          <div className="slide"><img src={phone_icon} alt="Slide 7" /></div>
-            <p>Drones</p>
-          </div>
-          <div className="slide-top">
-          <div className="slide"><img src={phone_icon} alt="Slide 8" /></div>
-             <p>Smart Phones</p>
-          </div>
+        {categories?.map((item: any, index: number) => (
+  <div className="slide-top" key={item.id}>
+    <div className="slide">
+      <img src={item.category_image} />
+    </div>
+    <p>{item.name}</p>
+  </div>
+))}
+
+         
         </Slider>
         </div>
 
