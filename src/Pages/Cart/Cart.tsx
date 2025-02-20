@@ -3,7 +3,7 @@ import './cart.css';
 import Header from '../../ReusableComp/Header';
 import Footer from '../../ReusableComp/footer';
 import { FaArrowRight } from 'react-icons/fa';
-import { cartListApi } from '../../store/services/products';
+import { cartListApi, cartQuantityManager } from '../../store/services/products';
 
 interface Product {
     image: string;
@@ -26,15 +26,27 @@ interface CartItemProps {
 
 const CartItem: React.FC<CartItemProps> = ({ item, onRemove }) => {
     const [cartValue, setCartValue] = useState(item?.quantity || 1);
+    const cartQuantity = (quantity: any) => {
+        cartQuantityManager({
+            body: {
+                product_id: item?.product?.id,
+                quantity
+            }
+        })?.then((res: any) => {
+            console.log('res', res)
+        })?.catch((err: any) => console.log('err', err))
+    }
 
     const decreaseCount = () => {
         if (cartValue > 1) {
             setCartValue(cartValue - 1);
+            cartQuantity(cartValue - 1);
         }
     };
 
     const increaseCount = () => {
         setCartValue(cartValue + 1);
+        cartQuantity(cartValue + 1);
     };
 
     return (
