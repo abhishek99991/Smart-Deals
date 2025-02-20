@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import otpImage from "../../assets/email-otp.png";
@@ -7,7 +7,7 @@ import { UserEmail } from "../../../Jotai";
 import { useAtom } from "jotai";
 import toast from "react-hot-toast";
 
-const OtpPopup = ({ onClose, onOtpSuccess  }: { onClose: () => void, onOtpSuccess: () => void }) => {
+const OtpPopup = ({ onClose, onOtpSuccess  }: any) => {
   
 
   const [userEmail]:any = useAtom(UserEmail);

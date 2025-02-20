@@ -48,7 +48,11 @@ const Header = () => {
           </div>
           <div className="col-40 flex align-center icons-head">
             <div><IoSearchOutline className="icon" size={20} /></div>
-            <div onClick={handleUserClick}><FaRegUser className="icon" size={20} /></div>
+            {localStorage.getItem("accessToken")?
+              <div onClick={handleUserClick}><FaRegUser className="icon" size={20} /></div>
+              :
+              <p  onClick={handleUserClick}>Login</p>
+            }
             <div><IoCartOutline className="icon" size={20} /></div>
           </div>
         </div>
