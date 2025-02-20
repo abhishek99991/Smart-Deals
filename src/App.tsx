@@ -14,6 +14,8 @@ import LoginSecurity from './Pages/LoginSecurity/LoginSecurity'
 import Adress from './Pages/Address/Address'
 import Order from './Pages/Order/Order'
 import { Toaster } from "react-hot-toast";
+import ChangePassword from "../src/Pages/Pop ups/ChangePassword"
+// import ForgetPassword from "../src/Pages/Pop ups/forgetPassword"
 
 
 function App() {
@@ -38,6 +40,8 @@ function App() {
               <Route path='/address' element={<Adress />}/>
               <Route path='/order' element={<Order />}/>
               <Route path='/order' element={<Order />}/>
+              <Route path='/change-password' element={<ChangePassword />}/>
+              {/* <Route path='/forget-password' element={<ForgetPassword/>}/> */}
           </Routes>
       </BrowserRouter>
    </div>

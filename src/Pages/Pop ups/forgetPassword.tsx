@@ -3,6 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import otpEmail from "../../assets/email-otp.png";
 import OtpPopup from "./otpPopup";
+import { useNavigate } from "react-router-dom";
 
 
 interface ForgotPasswordProps {
@@ -10,8 +11,9 @@ interface ForgotPasswordProps {
 }
 
 const ForgotPassword: React.FC<ForgotPasswordProps> = ({ forgetonClose }) => {
+  const navigate = useNavigate()
   const validationSchema = Yup.object({
-    email: Yup.string().email("Invalid email address").required("Email is required"),
+    email: Yup.string().email("Invalid email address").required(""),
   });
 
   const [sendOtp, isSendOtp]: any = useState(false);
@@ -40,6 +42,7 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ forgetonClose }) => {
                 setSubmitting(false);
                 isSendOtp(true);
               }, 500); // Simulate a 0.5 second delay
+              navigate('./change-password')
             }}
           >
             {({ isSubmitting }) => (
@@ -57,6 +60,8 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ forgetonClose }) => {
         </div>
       </div>
     )}
+    
+    
     </>
   );
 };
