@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './cart.css'
 import Header from '../../ReusableComp/Header'
 import Footer from '../../ReusableComp/footer'
@@ -9,6 +9,15 @@ import { cartListApi } from '../../store/services/products'
 
 
 const Cart = () => {
+  const [cartValue, setCartValue] = useState(1);
+  const decreaseCount = () => {
+    if (cartValue > 1) setCartValue(cartValue - 1);
+  };
+
+  const increaseCount = () => {
+    setCartValue(cartValue + 1);
+  };
+
   const cartListDataApiResponse = () => {
     cartListApi()?.then((res: any) => {
       console.log('res', res)
@@ -39,32 +48,14 @@ const Cart = () => {
                     </div>
                     <div className="col-25 text-center ">
                         <div className="flex align-center cart-plus-minus-head">
-                          <div className='cart-minus'>-</div>
-                          <div className='cart-val'>1</div>
-                          <div className='cart-plus'>+</div>
+                          <div className='cart-minus' onClick={decreaseCount}>-</div>
+                          <div className='cart-val'>{cartValue}</div>
+                          <div className='cart-plus' onClick={increaseCount}>+</div>
                         </div>
                         <div className='cart-remove'><button>Remove</button></div>
                     </div>
                 </div>
-                <div className="flex space-bw shopping-beg-top">
-                    <div className="col-25 shopping-cart-img"><img src={ProductSmallImg} alt="" /></div>
-                    <div className="col-25 shopping-jbl-product">
-                        <div>JBL</div>
-                        <div>JBL Bluetooth Speaker</div>
-                        <div>Product ID:</div>
-                    </div>
-                    <div className="col-25 shopping-jbl-product">
-                      <div>1999.00 AED</div>
-                    </div>
-                    <div className="col-25 text-center ">
-                        <div className="flex align-center cart-plus-minus-head">
-                          <div className='cart-minus'>-</div>
-                          <div className='cart-val'>1</div>
-                          <div className='cart-plus'>+</div>
-                        </div>
-                        <div className='cart-remove'><button>Remove</button></div>
-                    </div>
-                </div>
+              
             </div>
             <div className="col-30">
                 <div className="flex align-center apply-coupan">

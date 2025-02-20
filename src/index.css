@@ -165,7 +165,7 @@ a{
 .banner-img img{
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: fill;
 }
 .banner-btn {
   margin-top: 25px;
@@ -646,8 +646,12 @@ padding: 5px 5px;
 .slider-top{
   padding: 60px 0 ;
 }
+.speaker-slider-img{
+  height: 400px;
+}
 .speaker-slider-img img{
   width: 100%;
+  height: 100%;
 }
 .bose-smart-text{
   font-size: 15px;
@@ -710,6 +714,7 @@ padding: 5px 5px;
   border: 2px solid #6F4E37;
   padding: 40px 25px;
   border-radius: 20px;
+  height: 400px;
 }
 .speaker-margin{
   margin-bottom: 60px;
