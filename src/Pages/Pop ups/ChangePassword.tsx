@@ -3,12 +3,11 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import ChangePwd from "../../assets/change-pwd.png";
 import OtpPopup from "./otpPopup";
+import { resetPassword } from "../../store/services/Auth";
+import toast from "react-hot-toast";
 
-interface ForgotPasswordProps {
-  forgetonClose?: () => void;
-}
 
-const ForgotPassword: React.FC<ForgotPasswordProps> = ({ forgetonClose }) => {
+const ChangePassword = ({ data, forgetonClose }: any) => {
   const [sendOtp, setSendOtp] = useState(false);
 
   // Validation schema using Yup
@@ -20,6 +19,26 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ forgetonClose }) => {
       .oneOf([Yup.ref("newPassword")], "Passwords must match")
       .required("Confirm password is required"),
   });
+
+  const apiHandler = (values: any, setSubmitting: any) => {
+    const body = {
+      ...data,
+      new_password: values?.newPassword,
+      confirm_password: values?.confirmNewPassword
+    };
+    resetPassword({
+      body
+    })?.then((res: any) =>{
+      toast.success(res?.msg);
+      setTimeout(() => {
+        setSubmitting(false);
+        setSendOtp(true);
+        forgetonClose();
+      }, 500);
+    })?.catch((err: any) =>{
+      toast.error(err?.data?.error);
+    })
+  }
 
   return (
     <>
@@ -41,11 +60,7 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ forgetonClose }) => {
                       initialValues={{ newPassword: "", confirmNewPassword: "" }}
                       validationSchema={validationSchema}
                       onSubmit={(values, { setSubmitting }) => {
-                        console.log("New password set:", values.newPassword);
-                        setTimeout(() => {
-                          setSubmitting(false);
-                          setSendOtp(true);
-                        }, 500);
+                        apiHandler(values, setSubmitting);
                       }}
 >
                 {({ isSubmitting }) => (
@@ -84,4 +99,4 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ forgetonClose }) => {
   );
 };
 
-export default ForgotPassword;
+export default ChangePassword;

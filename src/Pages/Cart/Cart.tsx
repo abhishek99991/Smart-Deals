@@ -1,13 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './cart.css'
 import Header from '../../ReusableComp/Header'
 import Footer from '../../ReusableComp/footer'
 import ProductSmallImg from '../../assets/product-small-img.png'
 import { FaArrowRight } from "react-icons/fa";
+import { cartListApi } from '../../store/services/products'
 
 
 
 const Cart = () => {
+  const cartListDataApiResponse = () => {
+    cartListApi()?.then((res: any) => {
+      console.log('res', res)
+    })?.catch((err: any) => {
+      console.log('err', err)
+    })
+  }
+
+  useEffect(() => {
+    cartListDataApiResponse();
+  }, [])
   return (
     <div>
       <Header/>

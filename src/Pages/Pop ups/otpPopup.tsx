@@ -1,43 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import otpImage from "../../assets/email-otp.png";
-import { sendOtpEmail } from "../../store/services/Auth";
-import { UserEmail } from "../../../Jotai";
-import { useAtom } from "jotai";
+import ChangePassword from "./ChangePassword";
+import { verifyOtpForgot } from "../../store/services/Auth";
 import toast from "react-hot-toast";
 
-const OtpPopup = ({ onClose, onOtpSuccess  }: any) => {
-  
-
-  const [userEmail]:any = useAtom(UserEmail);
+const OtpPopup = ({ setData, data, onClose  }: any) => {
+  const [varifyOtp, setVarifyOtp]: any = useState(false);
   const otpSchema = Yup.object().shape({
     otp: Yup.array()
       .of(Yup.string().matches(/^[0-9]$/, "Must be a number").required("Required"))
       .length(4, "OTP must be 4 digits"),
   });
 
-
-  const handleSubmitOtp = (email: string, otp: string) => {
-    console.log("Email:", email);
-    console.log("OTP:", otp);
-    sendOtpEmail({
-   
-      body: {
-        email: userEmail,
-        otp: otp
-      },
-    }).then((res:any)=>{
-      toast.success(res.msg)
-      onClose();  // Close OTP popup
-      onOtpSuccess();  // Redirect to SignIn
+  const apiHandler = (values: any) => {
+    const body = {
+      email: data?.email,
+      otp: values?.otp?.join("")
+    };
+    verifyOtpForgot({
+      body
+    })?.then((res: any) =>{
+      toast.success(res?.msg);
+      setVarifyOtp(true);
+      setData(body);
+    })?.catch((err: any) =>{
+      console.log('err', err);
+      toast.error(err?.data?.error);
     })
-    
-  };
+  }
 
-  
 
   return (
+    <>
+    {!varifyOtp ? (
     <div className="otp-popup-overlay" onClick={onClose}>
       <div className="otp-popup-box" onClick={(e) => e.stopPropagation()}>
         <button className="close-btn" onClick={onClose}>✖</button>
@@ -47,15 +44,13 @@ const OtpPopup = ({ onClose, onOtpSuccess  }: any) => {
         </div>
 
         <h2 className="otp-title">OTP Verification</h2>
-        <p className="otp-text">OTP has been sent to <strong>{userEmail}</strong></p>
+        <p className="otp-text">OTP has been sent to <strong>{data?.email}</strong></p>
 
         <Formik
           initialValues={{ otp: ["", "", "", ""] }}
           validationSchema={otpSchema}
           onSubmit={(values) => {
-            const storedEmail = sessionStorage.getItem("userEmail") || "";
-            const otpCode = values.otp.join("");
-            handleSubmitOtp(storedEmail, otpCode);
+            apiHandler(values);
           }}
         >
           {({ values, handleChange, handleBlur, handleSubmit }) => (
@@ -94,6 +89,10 @@ const OtpPopup = ({ onClose, onOtpSuccess  }: any) => {
         </Formik>
       </div>
     </div>
+    ) : (
+      <ChangePassword data={data} forgetonClose={onClose}/>
+    )}
+    </>
   );
 };
 

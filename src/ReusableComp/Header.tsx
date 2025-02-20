@@ -33,6 +33,10 @@ const Header = () => {
     setIsLoginOpen(true);
   };
 
+  const cartClickHandler = () => {
+    navigate("/cart");
+  }
+
   return (
     <>
       <div className="nav-top">
@@ -53,7 +57,10 @@ const Header = () => {
               :
               <p  onClick={handleUserClick}>Login</p>
             }
-            <div><IoCartOutline className="icon" size={20} /></div>
+
+            {localStorage.getItem("accessToken") &&
+            <div onClick={cartClickHandler}><IoCartOutline className="icon" size={20} /></div>
+            }
           </div>
         </div>
       </div>

@@ -43,12 +43,26 @@ export const authEndpoints = {
       uri: "/categories/",
     },
   },
-  // forgetPassword: {
-  //   v1: {
-  //     ...defaults.methods.POST,
-  //     ...defaults.versions.v1,
-  //     uri: "/send-otp/",
-  //   },
-  // },
+  forgetPasswordSendOtp: {
+    v1: {
+      ...defaults.methods.POST,
+      ...defaults.versions.v1,
+      uri: "/send-otp/",
+    },
+  },
+  verifyOtpForgot: {
+    v1: {
+      ...defaults.methods.POST,
+      ...defaults.versions.v1,
+      uri: "/verify-email-otp/",
+    },
+  },
+  resetPassword: {
+    v1: {
+      ...defaults.methods.POST,
+      ...defaults.versions.v1,
+      uri: "/reset-password/",
+    },
+  },
 }
 

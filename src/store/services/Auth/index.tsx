@@ -36,7 +36,22 @@ export const registerUser = ({ body }: any) =>
            uriEndPoint: authEndpoints.getCategories.v1,
            });
            
- export const forgetPassword = () =>
+ export const forgetPasswordSendOtp = ({body}: any) =>
           callApi({
-           uriEndPoint: authEndpoints.getCategories.v1,
+           uriEndPoint: authEndpoints.forgetPasswordSendOtp.v1,
+           body
            });
+
+export const verifyOtpForgot = ({body}: any) =>
+callApi({
+  uriEndPoint: authEndpoints.verifyOtpForgot.v1,
+  body
+  });
+
+export const resetPassword = ({body}: any) =>
+    callApi({
+      uriEndPoint: authEndpoints.resetPassword.v1,
+      body
+      });
+  
+           

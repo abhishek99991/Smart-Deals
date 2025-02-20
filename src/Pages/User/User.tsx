@@ -28,6 +28,8 @@ const User = () => {
     logoutUser()
       .then((res: any) => {
         localStorage.removeItem("accessToken");
+        sessionStorage.clear();
+        localStorage.clear();
         Navigate("/");
         toast.success("Logout user successfully.");
       })
