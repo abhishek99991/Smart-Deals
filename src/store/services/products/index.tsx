@@ -11,4 +11,11 @@ export const cartQuantityManager = ({body}: any) =>
       uriEndPoint: productEndpoints.cartQuantityManager.v1,
       body
     });
+
+export const removeCartItem = ({query}: any) =>
+      callApi({
+        uriEndPoint: productEndpoints.removeCartItem.v1,
+        query
+      });
   
+    

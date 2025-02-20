@@ -3,7 +3,8 @@ import './cart.css';
 import Header from '../../ReusableComp/Header';
 import Footer from '../../ReusableComp/footer';
 import { FaArrowRight } from 'react-icons/fa';
-import { cartListApi, cartQuantityManager } from '../../store/services/products';
+import { cartListApi, cartQuantityManager, removeCartItem } from '../../store/services/products';
+import toast from 'react-hot-toast';
 
 interface Product {
     image: string;
@@ -19,12 +20,8 @@ interface CartItemType {
     quantity: number;
 }
 
-interface CartItemProps {
-    item: CartItemType;
-    onRemove: (productId: string) => void;
-}
 
-const CartItem: React.FC<CartItemProps> = ({ item, onRemove }) => {
+const CartItem = ({ item, cartListDataApiResponse }: any) => {
     const [cartValue, setCartValue] = useState(item?.quantity || 1);
     const cartQuantity = (quantity: any) => {
         cartQuantityManager({
@@ -32,8 +29,8 @@ const CartItem: React.FC<CartItemProps> = ({ item, onRemove }) => {
                 product_id: item?.product?.id,
                 quantity
             }
-        })?.then((res: any) => {
-            console.log('res', res)
+        })?.then(() => {
+            cartListDataApiResponse();
         })?.catch((err: any) => console.log('err', err))
     }
 
@@ -48,6 +45,17 @@ const CartItem: React.FC<CartItemProps> = ({ item, onRemove }) => {
         setCartValue(cartValue + 1);
         cartQuantity(cartValue + 1);
     };
+
+    const removeCartItemHandler = (product_id: any) => {
+        removeCartItem({
+            query: {
+                product_id
+            }
+        })?.then(() => {
+            toast.success("Remove item Successfully.");
+            cartListDataApiResponse();
+        })?.catch((err: any) => console.log('err', err))
+    }
 
     return (
         <div className="flex space-bw shopping-beg-top">
@@ -66,7 +74,7 @@ const CartItem: React.FC<CartItemProps> = ({ item, onRemove }) => {
                     <div className='cart-val'>{cartValue}</div>
                     <div className='cart-plus' onClick={increaseCount}>+</div>
                 </div>
-                <div className='cart-remove'><button onClick={() => onRemove(item.product.id)}>Remove</button></div>
+                <div className='cart-remove'><button onClick={() => removeCartItemHandler(item.product.id)}>Remove</button></div>
             </div>
         </div>
     );
@@ -95,10 +103,6 @@ const Cart = () => {
         cartListDataApiResponse();
     }, []);
 
-    const handleRemove = (productId: string) => {
-      setCartItems((prevItems: any) => prevItems.filter((item: any) => item.product.id !== productId));
-      console.log(`Removing product with ID: ${productId}`);
-    };
 
     const subtotal = cartItems.reduce((acc : any, item: any) => acc + (item?.product?.price * item?.quantity), 0);
     const delivery = 51.00;
@@ -132,13 +136,13 @@ const Cart = () => {
                 <h2 className='shopping-bag'>Shopping Bag</h2>
                 <div className="flex space-bw">
                     <div className="col-70 ">
-                        {cartItems?.map((item: CartItemType) => (
+                        {cartItems?.length > 0  ? cartItems?.map((item: CartItemType) => (
                             <CartItem
                                 key={item?.product?.id}
                                 item={item}
-                                onRemove={handleRemove}
+                                cartListDataApiResponse={cartListDataApiResponse}
                             />
-                        ))}
+                        )): <h2>Cart is empty!</h2>}
                     </div>
                     <div className="col-30">
                         <div className="flex align-center apply-coupan">

@@ -15,5 +15,12 @@ export const productEndpoints = {
       uri: "/cart/",
     },
   },
+  removeCartItem: {
+    v1: {
+      ...defaults.methods.DELETE,
+      ...defaults.versions.v1,
+      uri: "/cart/",
+    },
+  },
 }
 
